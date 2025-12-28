@@ -4,17 +4,19 @@ Library    SeleniumLibrary
 *** Variables ***
 ${CHROME_BROWSER_PATH}    Z:${/}SE${/}lab4${/}ChromeForTesting${/}chrome-win64${/}chrome.exe
 ${CHROME_DRIVER_PATH}     Z:${/}SE${/}lab4${/}ChromeForTesting${/}chromedriver.exe
-${URL}                    http://localhost:7272/Lab4/Registration.html
+${URL}                    http://localhost:7272/Registration.html
+
+
 
 *** Test Cases ***
-TC_002: Register Success
-    # (ส่วน Test Case เหมือนเดิม)
+UAT-Lab04-001
     ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
     ${chrome_options.binary_location}=    Set Variable    ${CHROME_BROWSER_PATH}
     ${service}=    Evaluate    sys.modules["selenium.webdriver.chrome.service"].Service(executable_path=r"${CHROME_DRIVER_PATH}")    sys, selenium.webdriver.chrome.service
     Create Webdriver    Chrome    options=${chrome_options}    service=${service}
     
     Go To    ${URL}
+
     Input Text    id=firstname       Somyod
     Input Text    id=lastname        Sodsai
     Input Text    id=organization    CS KKU

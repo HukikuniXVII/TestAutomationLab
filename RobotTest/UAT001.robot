@@ -1,31 +1,29 @@
 *** Settings ***
-Library    SeleniumLibrary
-
-*** Variables ***
-${CHROME_BROWSER_PATH}    Z:${/}SE${/}lab4${/}ChromeForTesting${/}chrome-win64${/}chrome.exe
-${CHROME_DRIVER_PATH}     Z:${/}SE${/}lab4${/}ChromeForTesting${/}chromedriver.exe
-${URL}                    http://localhost:7272/Registration.html
-
-
+Library     SeleniumLibrary
+Resource    resource.resource
 
 *** Test Cases ***
-UAT-Lab04-001
-    ${chrome_options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-    ${chrome_options.binary_location}=    Set Variable    ${CHROME_BROWSER_PATH}
-    ${service}=    Evaluate    sys.modules["selenium.webdriver.chrome.service"].Service(executable_path=r"${CHROME_DRIVER_PATH}")    sys, selenium.webdriver.chrome.service
-    Create Webdriver    Chrome    options=${chrome_options}    service=${service}
-    
-    Go To    ${URL}
 
-    Input Text    id=firstname       Somyod
-    Input Text    id=lastname        Sodsai
-    Input Text    id=organization    CS KKU
-    Input Text    id=email           somyod@kkumail.com
-    Input Text    id=phone           091-001-1234
-    Click Button    id=registerButton
+TC_001 : Register Success
+    [Documentation]    Register Success
+    Open Workshop Registration Page
+    Input First Name      Somyod
+    Input Last Name       Sodsai
+    Input Organization    CS KKU
+    Input Email           somyod@kkumail.com
+    Input Phone No        091-001-1234
+    Submit Registration
+    Verify Success Page
+    [Teardown]    Close Browser
+
+TC_002 : Register Success No Organization Info
+    [Documentation]    No Organization Info
+    Open Workshop Registration Page
+    Input First Name      Somyod
+    Input Last Name       Sodsai
     
-    Wait Until Page Contains    Success
-    Title Should Be    Success
-    Page Should Contain    Thank you for registering with us.
-    Page Should Contain    We will send a confirmation to your email soon.
+    Input Email           somyod@kkumail.com
+    Input Phone No        091-001-1234
+    Submit Registration
+    Verify Success Page
     [Teardown]    Close Browser

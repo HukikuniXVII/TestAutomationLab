@@ -1,10 +1,10 @@
 *** Settings ***
 Library     SeleniumLibrary
-Resource    resource.resource
+Resource    ../resource.resource
 
 *** Test Cases ***
 
-TC_001 : Register Success
+TC_001
     [Documentation]    Register Success
     Open Workshop Registration Page
     Input First Name      Somyod
@@ -16,7 +16,7 @@ TC_001 : Register Success
     Verify Success Page
     [Teardown]    Close Browser
 
-TC_002 : Register Success No Organization Info
+TC_002
     [Documentation]    No Organization Info
     Open Workshop Registration Page
     Input First Name      Somyod

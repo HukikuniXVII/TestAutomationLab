@@ -1,6 +1,6 @@
 *** Settings ***
 Library     SeleniumLibrary
-Resource    resource.resource
+Resource    ../resource.resource
 
 *** Test Cases ***
 
